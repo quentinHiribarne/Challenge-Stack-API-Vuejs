@@ -1,0 +1,3 @@
+<template>
+    All ingredients
+</template>

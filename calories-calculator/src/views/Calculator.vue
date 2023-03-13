@@ -1,0 +1,3 @@
+<template>
+    Calories calculator
+</template>

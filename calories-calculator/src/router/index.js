@@ -16,6 +16,16 @@ const routes = [
                 path: "/recipies",
                 component: () => import("../views/Recipies.vue"),
             },
+            {
+                name: "ingredients",
+                path: "/ingredients",
+                component: () => import("../views/Ingredients.vue"),
+            },
+            {
+                name: "calculator",
+                path: "/calculator",
+                component: () => import("../views/Calculator.vue"),
+            },
         ]
     },
 ];
