@@ -45,17 +45,23 @@
                         </thead>
 
                         <tbody class="divide-y divide-gray-200">
-                            <tr v-for="recipe in recipes" :key="recipe.id">
-                                <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
+                            <tr v-for="recipe in recipes" :key="recipe.id"
+                                @click="openRecipe(recipe)"
+                                class="cursor-pointer hover:bg-gray-50">
+                                <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500"
+                                    @click="openRecipe(recipe)">
                                     {{ recipe.title }}
                                 </td>
-                                <td class="hidden sm:table-cell whitespace-nowrap py-4 px-3 text-sm text-gray-500">
+                                <td class="hidden sm:table-cell whitespace-nowrap py-4 px-3 text-sm text-gray-500"
+                                    @click="openRecipe(recipe)">
                                     {{ recipe.author }}
                                 </td>
-                                <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
+                                <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500"
+                                    @click="openRecipe(recipe)">
                                     {{ recipeCalories(recipe) }}
                                 </td>
-                                <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
+                                <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500"
+                                    @click="openRecipe(recipe)">
                                     {{ recipe.publication_date }}
                                 </td>
                                 <td class="flex flex-col sm:flex-row gap-4 py-4 pl-3 w-fit">
@@ -77,7 +83,7 @@
     </div>
 
     <SlideOver
-       :open="openSlideOver"
+       :open="showSlideOver"
        :title="editing ? 'Modifier la recette' : 'Créer une recette'"
        :isValid="isValid"
        @close="closeSlideOver"
@@ -152,6 +158,40 @@
             </div>
         </template>
     </SlideOver>
+
+    <Modal
+       :open="showModal"
+       :title="currentRecipe.title"
+       @close="showModal = false">
+    
+        <template #content>
+            <div class="flex flex-col w-full h-fit gap-4">
+                <p class="text-sm text-gray-500 justify-center">
+                    par {{ currentRecipe.author }}, le {{ currentRecipe.publication_date }}
+                </p>
+                <div v-if="currentRecipe.ingredients.length > 0">
+                    <p>
+                        Ingrédients :
+                    </p>
+                    <ul>
+                        <li v-for="ingredient in currentRecipe.ingredients" :key="ingredient.name">
+                            {{ ingredient.quantity + ' ' + ingredient.unit + ' ' + ingredient.name }}
+                        </li>
+                    </ul>
+                </div>
+                <div v-if="currentRecipe.steps.length > 0">
+                    <p>
+                        Étapes :
+                    </p>
+                    <ol>
+                        <li v-for="step in currentRecipe.steps" :key="step.step">
+                            {{ step.description }}
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </template>
+    </Modal>
 </template>
 
 <script setup>
@@ -161,6 +201,7 @@
     import { Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions } from '@headlessui/vue';
 
     import SlideOver from '../components/overlays/SlideOverSlotActionFooter.vue';
+    import Modal from '../components/overlays/ModalSimpleSlot.vue';
 
     const recipes = ref([
         {
@@ -182,7 +223,10 @@
     ]);
     const ingredients = ref([]);
 
-    const openSlideOver = ref(false);
+    const showModal = ref(false);
+    const currentRecipe = ref({});
+
+    const showSlideOver = ref(false);
     const editing = ref(false);
     const recipe = ref({
         title: '',
@@ -199,11 +243,16 @@
         return calories;
     }
 
+    const openRecipe = (recipe) => {
+        showModal.value = true;
+        currentRecipe.value = recipe;
+    }
+
     const createRecipe = () => {
-        openSlideOver.value = true;
+        showSlideOver.value = true;
     };
     const editRecipe = (editRecipe) => {
-        openSlideOver.value = true;
+        showSlideOver.value = true;
         editing.value = true;
         recipe.value = editRecipe;
     };
@@ -212,7 +261,7 @@
     const saveRecipe = () => editing.value ? console.log('save changes in ' + recipe.value.id) : console.log('save new recipe ' + recipe.value.title);
 
     const closeSlideOver = () => {
-        openSlideOver.value = false;
+        showSlideOver.value = false;
         recipe.value = {
             title: '',
             author: '',
