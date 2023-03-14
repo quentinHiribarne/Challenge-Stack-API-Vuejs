@@ -1,5 +1,10 @@
 const express = require("express");
-const { readFile, writeFile, analyzeRecipe } = require("../src/utils");
+const {
+  readFile,
+  writeFile,
+  analyzeRecipe,
+  verifyToken,
+} = require("../src/utils");
 
 const router = express.Router();
 
@@ -12,6 +17,11 @@ let recipes = readFile(recipesFile);
  * Purpose: Create a recipe
  */
 router.post("/", (req, res) => {
+  // Verify the token
+  if (!verifyToken(req)) {
+    res.status(401).send("Unauthorized request");
+  }
+
   // Get recipe from the request body
   let recipe = req.body;
 
@@ -51,6 +61,11 @@ router.post("/", (req, res) => {
  * Params: {id} - id of the recipe
  */
 router.get("/:id", (req, res) => {
+  // Verify the token
+  if (!verifyToken(req)) {
+    res.status(401).send("Unauthorized request");
+  }
+
   // Reading id from the URL
   const id = req.params.id;
 
@@ -72,6 +87,11 @@ router.get("/:id", (req, res) => {
  * Params: {id} - id of the recipe
  */
 router.delete("/:id", (req, res) => {
+  // Verify the token
+  if (!verifyToken(req)) {
+    res.status(401).send("Unauthorized request");
+  }
+
   // Reading id from the URL
   const id = req.params.id;
   let status, message;
@@ -102,6 +122,11 @@ router.delete("/:id", (req, res) => {
  * Params: {id} - id of the recipe
  */
 router.put("/:id", (req, res) => {
+  // Verify the token
+  if (!verifyToken(req)) {
+    res.status(401).send("Unauthorized request");
+  }
+
   // Reading id from the URL
   const id = req.params.id;
   const newrecipe = req.body;
@@ -130,6 +155,11 @@ router.put("/:id", (req, res) => {
  * Purpose: Analyze a recipe nutritional value
  */
 router.get("/analyze", (req, res) => {
+  // Verify the token
+  if (!verifyToken(req)) {
+    res.status(401).send("Unauthorized request");
+  }
+
   // Reading id from the URL
   const id = req.params.id;
 
