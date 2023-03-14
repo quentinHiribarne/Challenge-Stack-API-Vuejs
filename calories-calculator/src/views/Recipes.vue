@@ -76,13 +76,16 @@
     <SlideOver
        :open="openSlideOver"
        :title="editing ? 'Modifier la recette' : 'Créer une recette'"
-       @close="closeSlideOver" >
+       :isValid="isValid"
+       @close="closeSlideOver"
+       @save="saveRecipe" >
     
         <template #content>
             <div class="flex flex-col gap-4">
                 <div>
                     <label for="title" class="block text-sm font-medium leading-6 text-gray-900">
                         Titre
+                        <span class="text-red-500">*</span>
                     </label>
                     <div class="mt-2">
                         <input type="title" name="title" id="title"
@@ -93,6 +96,7 @@
                 <div>
                     <label for="author" class="block text-sm font-medium leading-6 text-gray-900">
                         Auteur
+                        <span class="text-red-500">*</span>
                     </label>
                     <div class="mt-2">
                         <input type="author" name="author" id="author" 
@@ -184,6 +188,8 @@
         steps: []
     });
 
+    const isValid = computed(() => !recipe.value.title || !recipe.value.author ? false : true);
+
     const recipeCalories = (recipe) => {
         let calories = 0;
         recipe.ingredients.forEach(ingredient => calories = calories + ingredient.calories);
@@ -199,6 +205,8 @@
         recipe.value = editRecipe;
     };
     const deleteRecipe = (recipe) => console.log('delete ' + recipe.id);
+
+    const saveRecipe = () => editing.value ? console.log('save changes in ' + recipe.value.id) : console.log('save new recipe ' + recipe.value.title);
 
     const closeSlideOver = () => {
         openSlideOver.value = false;

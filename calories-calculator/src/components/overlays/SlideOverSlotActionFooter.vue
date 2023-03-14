@@ -30,11 +30,15 @@
                                         </div>
                                     </div>
                                     <div class="flex flex-shrink-0 justify-end px-4 py-4">
-                                        <button type="button" class="rounded-md bg-white py-2 px-3 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:ring-gray-400"
-                                            @click="$emit('close')">
+                                        <button type="button"
+                                            @click="$emit('close')"
+                                            class="rounded-md bg-white py-2 px-3 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:ring-gray-400">
                                             Annuler
                                         </button>
-                                        <button type="submit" class="ml-4 inline-flex justify-center rounded-md bg-emerald-500 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-emerald-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500">
+                                        <button type="submit"
+                                            :disabled="!isValid"
+                                            @click="$emit('save')"
+                                            class="ml-4 inline-flex justify-center rounded-md bg-emerald-500 disabled:bg-gray-500 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-emerald-400 disabled:hover:bg-gray-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500">
                                             Sauvegarder
                                         </button>
                                     </div>
@@ -58,8 +62,12 @@
             type: Boolean,
             default: false
         },
+        isValid: {
+            type: Boolean,
+            default: true
+        },
         title: String
     });
 
-    defineEmits(['close'])
+    defineEmits(['close', 'save'])
 </script>
