@@ -1,3 +1,0 @@
-<template>
-    All recipies
-</template>

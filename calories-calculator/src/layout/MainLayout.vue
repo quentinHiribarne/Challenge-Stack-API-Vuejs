@@ -101,7 +101,7 @@
 
     const navigation = [
         { name: 'Accueil', route: '/', icon: HomeIcon, current: true },
-        { name: 'Les recettes', route: '/recipies', icon: ListBulletIcon, current: false },
+        { name: 'Les recettes', route: '/recipes', icon: ListBulletIcon, current: false },
         { name: 'Les ingrédients', route: '/ingredients', icon: ShoppingCartIcon, current: false },
         { name: 'Calculateur de calories', route: '/calculator', icon: CalculatorIcon, current: false },
     ];
