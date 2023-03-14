@@ -1,5 +1,5 @@
 const express = require("express");
-const { readFile, writeFile, addRecipe } = require("../src/utils");
+const { readFile, writeFile, analyzeRecipe } = require("../src/utils");
 
 const router = express.Router();
 
@@ -12,31 +12,6 @@ let recipes = readFile(recipesFile);
  * Purpose: Create a recipe
  */
 router.post("/", (req, res) => {
-  // Recipe example
-  /*
-  {
-    "id": "string"
-    "title": "string",
-    "author": "string",
-    "publication_date": "string",
-    "ingredients": [
-        {
-          "name": "string",
-          "quantity": "number",
-          "unit": "string", // g or mL only
-          "calorie": "string"
-        }
-    ],
-    "steps": [
-        {
-          "step": "number",
-          "title": "string",
-          "description": "string"
-        }
-    ]
-  }
-  */
-
   // Get recipe from the request body
   let recipe = req.body;
 
@@ -151,38 +126,21 @@ router.put("/:id", (req, res) => {
 });
 
 /**
- * GET /recipe/{id}/analyze
- * Purpose: Analyze a recipe nutritional value by id
- * Params: {id} - id of the recipe
+ * GET /recipe/analyze
+ * Purpose: Analyze a recipe nutritional value
  */
-router.get("/:id/analyze", (req, res) => {
+router.get("/analyze", (req, res) => {
   // Reading id from the URL
   const id = req.params.id;
 
-  // Searching recipes for the id
-  for (let recipe of recipes) {
-    if (recipe.id === id) {
-      // Analyze the recipe
-      let totalCalories = 0;
+  //Get recipe from the request body
+  let recipe = req.body;
 
-      // Loop through the ingredients and calculate the total calories
-      for (let ingredient of recipe.ingredients) {
-        let calorie = ingredient.calorie;
-        let quantity = ingredient.quantity;
+  let totalCalories = analyzeRecipe(recipe);
 
-        totalCalories += calorie * quantity;
-      }
-
-      res.json({
-        totalCalories,
-      });
-
-      return;
-    }
-  }
-
-  // Sending 404 when recipe not found
-  res.status(404).send("recipe not found");
+  res.json({
+    totalCalories,
+  });
 });
 
 module.exports = router;

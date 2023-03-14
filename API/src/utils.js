@@ -37,8 +37,44 @@ const writeFile = (filePath, recipeList) => {
   }
 };
 
+/**
+ * Custom made fuction to analyze the recipe nutritional information
+ * @param {Object} recipe - The recipe object
+ * @returns {Number} - The recipe nutritional information
+ */
+const analyzeRecipe = (recipe) => {
+  let totalCalories = 0;
+
+  // Get ingredients from the ingredients.json file
+  const ingredientsFile = process.cwd() + "/data/ingredients.json";
+  const ingredientsRef = readFile(ingredientsFile);
+
+  // Loop through the ingredientsRef and calculate the total calories for the recipe
+  for (let ingredient of recipe.ingredients) {
+    // Get the ingredient from the ingredientsRef
+    let ingredientRef;
+
+    for (let i of ingredientsRef) {
+      if (i.id === ingredient.id) {
+        ingredientRef = i.nutrition;
+        break;
+      }
+    }
+
+    // Calculate the calories for the ingredient
+    let ingredientCalories = ingredientRef.calories * ingredient.quantity;
+
+    // Add the calories to the total calories
+    totalCalories += ingredientCalories;
+  }
+
+  // Return the recipe nutritional information
+  return totalCalories;
+};
+
 // Export the functions
 module.exports = {
   readFile,
   writeFile,
+  analyzeRecipe,
 };
