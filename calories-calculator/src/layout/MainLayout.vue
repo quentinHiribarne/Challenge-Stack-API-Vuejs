@@ -22,10 +22,10 @@
                                         <router-link v-for="item in navigation" :key="item.name"
                                             @click="changeCurrentItem(item)"
                                             :to="item.route"
-                                            :class="[item.current ? 'bg-green-100 text-green-900' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
+                                            :class="[item.current ? 'bg-emerald-100 text-emerald-900' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
                                                     'group flex items-center rounded-md px-2 py-2 text-base font-medium']">
                                             <component :is="item.icon"
-                                                :class="[item.current ? 'text-green-500' : 'text-gray-400 group-hover:text-gray-500',
+                                                :class="[item.current ? 'text-emerald-500' : 'text-gray-400 group-hover:text-gray-500',
                                                         'mr-4 h-6 w-6 flex-shrink-0']"
                                                 aria-hidden="true"
                                             />
@@ -51,10 +51,10 @@
                         <router-link v-for="item in navigation" :key="item.name"
                             @click="changeCurrentItem(item)"
                             :to="item.route"
-                            :class="[item.current ? 'bg-green-100 text-green-900' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
+                            :class="[item.current ? 'bg-emerald-100 text-emerald-900' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
                                     'group flex items-center rounded-md px-2 py-2 text-sm font-medium']">
                             <component :is="item.icon"
-                                :class="[item.current ? 'text-green-500' : 'text-gray-400 group-hover:text-gray-500',
+                                :class="[item.current ? 'text-emerald-500' : 'text-gray-400 group-hover:text-gray-500',
                                         'mr-4 h-6 w-6 flex-shrink-0']"
                                 aria-hidden="true"
                             />
@@ -64,6 +64,7 @@
                 </div>
             </div>
         </div>
+
         <div class="flex flex-1 flex-col lg:pl-64">
             <div class="sticky top-0 z-10 bg-gray-100 pl-1 pt-1 sm:pl-3 sm:pt-3 lg:hidden">
                 <button type="button" class="-ml-0.5 -mt-0.5 inline-flex h-12 w-12 items-center justify-center rounded-md text-gray-500 hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500" @click="sidebarOpen = true">
@@ -71,11 +72,9 @@
                 <Bars3Icon class="h-6 w-6" aria-hidden="true" />
                 </button>
             </div>
+
             <main class="flex-1">
                 <div class="py-6">
-                    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                        <h1 class="text-2xl font-semibold text-gray-900">Dashboard</h1>
-                    </div>
                     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                         <router-view />
                     </div>
@@ -91,20 +90,20 @@
     import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue';
     import {
         Bars3Icon,
-        CalendarIcon,
+        ShoppingCartIcon,
         ChartBarIcon,
-        FolderIcon,
+        CalculatorIcon,
         HomeIcon,
         InboxIcon,
-        UsersIcon,
+        ListBulletIcon,
         XMarkIcon,
     } from '@heroicons/vue/24/outline';
 
     const navigation = [
         { name: 'Accueil', route: '/', icon: HomeIcon, current: true },
-        { name: 'Les recettes', route: '/recipies', icon: UsersIcon, current: false },
-        { name: 'Les ingrédients', route: '/ingredients', icon: CalendarIcon, current: false },
-        { name: 'Calculateur de calories', route: '/calculator', icon: FolderIcon, current: false },
+        { name: 'Les recettes', route: '/recipies', icon: ListBulletIcon, current: false },
+        { name: 'Les ingrédients', route: '/ingredients', icon: ShoppingCartIcon, current: false },
+        { name: 'Calculateur de calories', route: '/calculator', icon: CalculatorIcon, current: false },
     ];
 
     const sidebarOpen = ref(false);
