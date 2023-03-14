@@ -4,12 +4,6 @@
             <label for="file" class="block mt-1 text-base text-gray-500">
                 Déposez votre recette ici
             </label>
-            <!-- <div class="mt-6">
-                <button type="button" class="inline-flex items-center rounded-md bg-amber-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-amber-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-600">
-                    <ArrowDownTrayIcon class="-ml-0.5 mr-1.5 h-5 w-5" aria-hidden="true" />
-                    Sélectionner un fichier
-                </button>
-            </div> -->
             <input type="file" ref="file" name="file"
                 accept=".json"
                 class="mt-4 text-base"
