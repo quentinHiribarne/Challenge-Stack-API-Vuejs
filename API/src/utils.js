@@ -1,4 +1,6 @@
 const fs = require("fs");
+const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 /**
  * Custom made fuction to read from the Json file
@@ -72,9 +74,43 @@ const analyzeRecipe = (recipe) => {
   return totalCalories;
 };
 
+/**
+ * Custom made fuction to verify the token
+ * @param {Object} req - The request object
+ * @returns {Boolean} - The token verification result
+ */
+const verifyToken = (req) => {
+  // Get the token from the request header
+  //Authorization: 'Bearer TOKEN'
+  const token = req.headers.authorization.split(" ")[1];
+
+  // Get public key and private key from the environment variables
+  const publicKey = process.env.PUBLIC_KEY;
+  const privateKey = process.env.PRIVATE_KEY;
+
+  // Verify if the token exists and is valid
+  if (token) {
+    try {
+      const decoded = jwt.verify(token, privateKey);
+
+      // Verify if the public key is the same as the one in the token
+      if (decoded.publicKey === publicKey) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (err) {
+      console.log("Error! Something went wrong while decoding the token.", err);
+    }
+  } else {
+    return false;
+  }
+};
+
 // Export the functions
 module.exports = {
   readFile,
   writeFile,
   analyzeRecipe,
+  verifyToken,
 };
