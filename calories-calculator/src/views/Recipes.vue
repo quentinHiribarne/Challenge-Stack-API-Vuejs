@@ -26,11 +26,14 @@
                                 <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">
                                     Titre
                                 </th>
-                                <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900">
+                                <th scope="col" class="hidden sm:table-cell py-3.5 px-3 text-left text-sm font-semibold text-gray-900">
                                     Auteur
                                 </th>
-                                <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900">
+                                <th scope="col" class="hidden sm:table-cell py-3.5 px-3 text-left text-sm font-semibold text-gray-900">
                                     Calories
+                                </th>
+                                <th scope="col" class="sm:hidden py-3.5 px-3 text-left text-sm font-semibold text-gray-900">
+                                    Cal
                                 </th>
                                 <th scope="col" class="py-3.5 px-3 text-left text-sm font-semibold text-gray-900">
                                     Publication
@@ -46,7 +49,7 @@
                                 <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
                                     {{ recipe.title }}
                                 </td>
-                                <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
+                                <td class="hidden sm:table-cell whitespace-nowrap py-4 px-3 text-sm text-gray-500">
                                     {{ recipe.author }}
                                 </td>
                                 <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
@@ -55,7 +58,7 @@
                                 <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
                                     {{ recipe.publication_date }}
                                 </td>
-                                <td class="flex flex-row gap-4 py-4 pl-3 w-fit">
+                                <td class="flex flex-col sm:flex-row gap-4 py-4 pl-3 w-fit">
                                     <div @click="editRecipe(recipe)" class="cursor-pointer">
                                         <PencilSquareIcon class="w-5 h-5 text-blue-500 hover:text-blue-400" />
                                         <span class="sr-only">Éditer</span>
