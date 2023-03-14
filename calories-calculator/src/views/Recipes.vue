@@ -51,11 +51,11 @@
                                 </td>
                                 <td class="flex flex-row gap-4 py-4 pl-3 w-fit">
                                     <div @click="editRecipe(recipe)" class="cursor-pointer">
-                                        <PencilSquareIcon class="w-5 h-5 text-blue-500" />
+                                        <PencilSquareIcon class="w-5 h-5 text-blue-500 hover:text-blue-400" />
                                         <span class="sr-only">Éditer</span>
                                     </div>
                                     <div @click="deleteRecipe(recipe)" class="cursor-pointer">
-                                        <TrashIcon class="w-5 h-5 text-red-500" />
+                                        <TrashIcon class="w-5 h-5 text-red-500 hover:text-red-400" />
                                         <span class="sr-only">Supprimer</span>
                                     </div>
                                 </td>
@@ -66,12 +66,24 @@
             </div>
         </div>
     </div>
+
+    <SlideOver
+       :open="openSlideOver"
+       :title="recipeToEdit.id ? 'Modifier la recette' : 'Créer une recette'"
+       @close="closeSlideOver" >
+    
+        <template #content>
+            {{ recipeToEdit }}
+        </template>
+    </SlideOver>
 </template>
 
 <script setup>
     import { ref, computed } from 'vue';
 
-    import { PencilSquareIcon, TrashIcon } from '@heroicons/vue/24/solid'
+    import { PencilSquareIcon, TrashIcon } from '@heroicons/vue/24/solid';
+
+    import SlideOver from '../components/overlays/SlideOverSlotActionFooter.vue';
 
     const recipes = ref([
         {
@@ -92,7 +104,21 @@
         }
     ]);
 
-    const createRecipe = () => console.log('create new recipe');
-    const editRecipe = (recipe) => console.log('edit ' + recipe.id);
+    const openSlideOver = ref(false);
+    const recipeToEdit = ref({});
+    const newRecipe = ref({});
+
+    const createRecipe = () => {
+        openSlideOver.value = true;
+    };
+    const editRecipe = (recipe) => {
+        openSlideOver.value = true;
+        recipeToEdit.value = recipe;
+    };
     const deleteRecipe = (recipe) => console.log('delete ' + recipe.id);
+
+    const closeSlideOver = () => {
+        openSlideOver.value = false;
+        recipeToEdit.value = {};
+    }
 </script>
