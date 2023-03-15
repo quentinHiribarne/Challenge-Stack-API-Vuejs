@@ -18,7 +18,7 @@
 
                 <div class="mt-6">
                     <div>
-                        <button @click="generateToken"
+                        <button @click="handleGenerateToken"
                             type="button"
                             class="flex w-full justify-center rounded-md bg-emerald-500 py-2 px-3 text-sm font-semibold text-white shadow-sm hover:bg-emerald-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-500">
                             Entrer
@@ -40,10 +40,13 @@
 <script setup>
     import { useRouter } from "vue-router";
 
+    import Login from '../API/login.js';
+
     const router = useRouter();
 
-    const generateToken = () => {
-        localStorage.token = 'fauxTokenCeciEstUnTest';
+    const handleGenerateToken = async () => {
+        const JSON = await Login.generateToken();
+        localStorage.token = JSON.token;
         router.push({ name: 'home' });
     };
 </script>
