@@ -3,6 +3,8 @@ const cors = require("cors");
 
 const recipesRouter = require("./routes/recipes");
 const recipeRouter = require("./routes/recipe");
+const tokenRouter = require("./routes/token");
+const ingredientsRouter = require("./routes/ingredients");
 
 const app = express();
 const port = 3000;
@@ -14,6 +16,8 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use("/recipes", recipesRouter);
 app.use("/recipe", recipeRouter);
+app.use("/token", tokenRouter);
+app.use("/ingredients", ingredientsRouter);
 
 // Starting the server
 app.listen(port, () => console.log(`API listening on port ${port}!`));
