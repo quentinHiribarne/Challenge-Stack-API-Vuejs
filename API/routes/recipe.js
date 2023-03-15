@@ -130,8 +130,10 @@ router.put("/:id", (req, res) => {
  * Purpose: Analyze a recipe nutritional value
  */
 router.get("/analyze", (req, res) => {
-  // Reading id from the URL
-  const id = req.params.id;
+  // Verify the token
+  if (!verifyToken(req)) {
+    res.status(401).send("Unauthorized request");
+  }
 
   //Get recipe from the request body
   let recipe = req.body;
