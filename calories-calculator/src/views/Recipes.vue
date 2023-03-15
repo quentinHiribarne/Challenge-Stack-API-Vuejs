@@ -90,6 +90,7 @@
     
         <template #content>
             <div class="flex flex-col gap-4">
+                <!-- title -->
                 <div>
                     <label for="title" class="block text-sm font-medium leading-6 text-gray-900">
                         Titre
@@ -101,6 +102,7 @@
                             class="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-500 focus:outline-none sm:text-sm sm:leading-6" />
                     </div>
                 </div>
+                <!-- author -->
                 <div>
                     <label for="author" class="block text-sm font-medium leading-6 text-gray-900">
                         Auteur
@@ -113,15 +115,16 @@
                     </div>
                 </div>
                 
+                <!-- ingredients -->
                 <div>
-                    <Listbox as="div" v-model="recipeIngredients" multiple>
+                    <Listbox as="div" v-model="recipe.ingredients" multiple>
                         <ListboxLabel class="block text-sm font-medium leading-6 text-gray-900">
                             Ingrédients
                         </ListboxLabel>
                         <div class="relative mt-2">
                             <ListboxButton class="relative w-full cursor-default rounded-md bg-white py-1.5 pl-3 pr-10 text-left text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 sm:text-sm sm:leading-6">
-                                <span v-if="recipeIngredients.length > 0" class="block truncate">
-                                    {{ recipeIngredients.map((ingredient) => ingredient.name).join(', ') }}
+                                <span v-if="recipe.ingredients.length > 0" class="block truncate">
+                                    {{ recipe.ingredients.map((ingredient) => ingredient.name).join(', ') }}
                                 </span>
                                 <span v-else class="block truncate text-gray-500">
                                     Sélectionnez un ou plusieurs ingrédients
@@ -156,7 +159,7 @@
                         </div>
                     </Listbox>
                     <div class="flex flex-col gap-2 mt-2">
-                        <div v-for="ingredient in recipeIngredients" :key="ingredient.id"
+                        <div v-for="ingredient in recipe.ingredients" :key="ingredient.id"
                             class="flex gap-4 items-center">
                             <div class="flex items-center gap-2">
                                 <label for="quantity" class="text-sm font-medium leading-6 text-gray-900">
@@ -176,6 +179,8 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- TODO : steps -->
             </div>
         </template>
     </SlideOver>
@@ -190,23 +195,31 @@
                 <p class="text-sm text-gray-500 justify-center">
                     par {{ currentRecipe.author }}, le {{ currentRecipe.publication_date }}
                 </p>
-                <div v-if="currentRecipe.ingredients.length > 0">
+                <div v-if="currentRecipe.ingredients.length > 0"
+                    class="text-left">
                     <p>
                         Ingrédients :
                     </p>
-                    <ul>
+                    <ul class="list-disc pl-8">
                         <li v-for="ingredient in currentRecipe.ingredients" :key="ingredient.name">
-                            {{ ingredient.quantity + ' ' + ingredient.unit + ' ' + ingredient.name }}
+                            {{ `${ingredient.quantity} ${ingredient.unit ? ingredient.unit : ''} ${ingredient.name}` }}
                         </li>
                     </ul>
                 </div>
-                <div v-if="currentRecipe.steps.length > 0">
+                <div v-if="currentRecipe.steps.length > 0"
+                    class="text-left">
                     <p>
                         Étapes :
                     </p>
-                    <ol>
-                        <li v-for="step in currentRecipe.steps" :key="step.step">
-                            {{ step.description }}
+                    <ol class="list-decimal pl-8">
+                        <li v-for="step in currentRecipe.steps" :key="step.step"
+                            class="text-sm">
+                            <span class="font-medium">
+                                {{ step.title }} :
+                            </span>
+                            <span class="text-gray-700">
+                                {{ step.description }}
+                            </span>
                         </li>
                     </ol>
                 </div>
@@ -240,7 +253,6 @@
         ingredients: [],
         steps: []
     });
-    const recipeIngredients = ref([]);
 
     const isValid = computed(() => !recipe.value.title || !recipe.value.author ? false : true);
 
@@ -253,22 +265,12 @@
         showSlideOver.value = true;
         editing.value = true;
         recipe.value = recipeToEdit;
-        recipe.value.ingredients.forEach(recipeIngredient => {
-            ingredients.value.forEach(ingredient => {
-                if (ingredient.id == recipeIngredient.id) {
-                    recipeIngredients.value.push({ name: ingredient.name, id: ingredient.id, quantity: recipeIngredient.quantity });
-                }
-            });
-        });
     };
 
     const deleteRecipe = async (id) => recipes.value = await RecipesAPI.deleteRecipe(id);
 
     const saveRecipe = async () => {
-        recipe.value.ingredients = [];
-        recipeIngredients.value.forEach(recipeIngredient => {
-            recipe.value.ingredients.push({ id: recipeIngredient.id, quantity: recipeIngredient.quantity });
-        });
+        
         if (editing.value) {
             console.log('update');
             recipes.value = await RecipesAPI.updateRecipe(recipe.value);
