@@ -1,24 +1,30 @@
 const express = require("express");
-const { readFile, writeFile, verifyToken } = require("../src/utils");
+const { writeFile, verifyToken, loadIngredients } = require("../src/utils");
 
 const router = express.Router();
 
-// Get ingredients from Json file: /API/data/ingredients.json
+// Path to the ingredients.json file
 const ingredientsFile = process.cwd() + "/data/ingredients.json";
-let ingredients = readFile(ingredientsFile);
 
 /**
  * POST /ingredient
  * Purpose: Create a ingredient
  */
 router.post("/", (req, res) => {
+  // Get the token from the request header
+  //Authorization: 'Bearer TOKEN'
+  const token = req.headers.authorization?.split(" ")[1];
+
   // Verify the token
-  if (!verifyToken(req)) {
+  if (!verifyToken(token)) {
     res.status(401).send("Unauthorized request");
   }
 
   // Get ingredient from the request body
   let ingredient = req.body;
+
+  // Get ingredients from the ingredients.json file
+  let ingredients = loadIngredients();
 
   // Generate unique id for the ingredient
   let id = Math.random().toString(36).substr(2, 9);
@@ -48,7 +54,7 @@ router.post("/", (req, res) => {
   // Add ingredient to the ingredients.json file
   writeFile(ingredientsFile, ingredients);
 
-  res.send("ingredient is added to the database");
+  res.status(201).json(loadIngredients());
 });
 
 /**
@@ -57,8 +63,12 @@ router.post("/", (req, res) => {
  * Params: {id} - id of the ingredient
  */
 router.get("/:id", (req, res) => {
+  // Get the token from the request header
+  //Authorization: 'Bearer TOKEN'
+  const token = req.headers.authorization?.split(" ")[1];
+
   // Verify the token
-  if (!verifyToken(req)) {
+  if (!verifyToken(token)) {
     res.status(401).send("Unauthorized request");
   }
 
@@ -83,13 +93,20 @@ router.get("/:id", (req, res) => {
  * Params: {id} - id of the ingredient
  */
 router.delete("/:id", (req, res) => {
+  // Get the token from the request header
+  //Authorization: 'Bearer TOKEN'
+  const token = req.headers.authorization?.split(" ")[1];
+
   // Verify the token
-  if (!verifyToken(req)) {
+  if (!verifyToken(token)) {
     res.status(401).send("Unauthorized request");
   }
 
   // Reading id from the URL
   const id = req.params.id;
+
+  // Get ingredients from the ingredients.json file
+  let ingredients = loadIngredients();
 
   // Schearch ingredients for the id
   if (ingredients.some((ingredient) => ingredient.id === id)) {
@@ -99,7 +116,7 @@ router.delete("/:id", (req, res) => {
     // Write the upadted list to the ingredients.json file
     writeFile(ingredientsFile, ingredients);
 
-    res.status(200).send("ingredient deleted");
+    res.status(200).json(loadIngredients());
   } else {
     res.status(404).send("ingredient not found");
   }
@@ -111,14 +128,21 @@ router.delete("/:id", (req, res) => {
  * Params: {id} - id of the ingredient
  */
 router.put("/:id", (req, res) => {
+  // Get the token from the request header
+  //Authorization: 'Bearer TOKEN'
+  const token = req.headers.authorization?.split(" ")[1];
+
   // Verify the token
-  if (!verifyToken(req)) {
+  if (!verifyToken(token)) {
     res.status(401).send("Unauthorized request");
   }
 
   // Reading id from the URL
   const id = req.params.id;
   const newingredient = req.body;
+
+  // Get ingredients from the ingredients.json file
+  let ingredients = loadIngredients();
 
   // Schearch ingredients for the id
   if (ingredients.some((ingredient) => ingredient.id === id)) {
@@ -137,7 +161,7 @@ router.put("/:id", (req, res) => {
     // Write the upadted list to the ingredients.json file
     writeFile(ingredientsFile, ingredients);
 
-    res.status(200).send("ingredient updated");
+    res.status(200).json(loadIngredients());
   } else {
     res.status(404).send("ingredient not found");
   }

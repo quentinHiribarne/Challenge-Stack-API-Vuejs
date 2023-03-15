@@ -79,11 +79,7 @@ const analyzeRecipe = (recipe) => {
  * @param {Object} req - The request object
  * @returns {Boolean} - The token verification result
  */
-const verifyToken = (req) => {
-  // Get the token from the request header
-  //Authorization: 'Bearer TOKEN'
-  const token = req.headers.authorization.split(" ")[1];
-
+const verifyToken = (token) => {
   // Get public key and private key from the environment variables
   const publicKey = process.env.PUBLIC_KEY;
   const privateKey = process.env.PRIVATE_KEY;
@@ -107,10 +103,62 @@ const verifyToken = (req) => {
   }
 };
 
+/**
+ * Load the ingredients from the Json file and return the ingredients object
+ * @returns {Object} - The ingredients object
+ */
+const loadIngredients = () => {
+  // Get ingredients from the ingredients.json file
+  const ingredientsFile = process.cwd() + "/data/ingredients.json";
+  return readFile(ingredientsFile);
+};
+
+/**
+ * Load the recipes from the Json file and return the recipes object with the nutritional information
+ * @returns {Object} - The recipes object
+ */
+const loadRecipes = () => {
+  // Get recipes from the recipes.json file
+  const recipesFile = process.cwd() + "/data/recipes.json";
+  const recipes = readFile(recipesFile);
+
+  // For each recipe, calculate the nutritional information and add it to the recipe object
+  for (let recipe of recipes) {
+    recipe.totalCalories = analyzeRecipe(recipe);
+  }
+
+  // Load the ingredients
+  const ingredientsList = loadIngredients();
+
+  // For each recipe, add the ingredient name, description and nutritional information to the recipe object
+  for (let recipe of recipes) {
+    for (let ingredient of recipe.ingredients) {
+      // Get the ingredient from the ingredientsList
+      let ingredientRef;
+
+      for (let i of ingredientsList) {
+        if (i.id === ingredient.id) {
+          ingredientRef = i;
+          break;
+        }
+      }
+
+      // Add the ingredient name, description and nutritional information to the recipe object
+      ingredient.name = ingredientRef.name;
+      ingredient.description = ingredientRef.description;
+      ingredient.nutrition = ingredientRef.nutrition;
+    }
+  }
+
+  return recipes;
+};
+
 // Export the functions
 module.exports = {
   readFile,
   writeFile,
   analyzeRecipe,
   verifyToken,
+  loadRecipes,
+  loadIngredients,
 };

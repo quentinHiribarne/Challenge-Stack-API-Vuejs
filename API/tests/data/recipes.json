@@ -1,0 +1,14 @@
+[
+  {
+    "id": "56pj41a0j",
+    "title": "string",
+    "author": "string",
+    "publication_date": "14/3/2023",
+    "ingredients": [
+      { "id": 1, "quantity": 2 },
+      { "id": 2, "quantity": 1 },
+      { "id": 3, "quantity": 1 }
+    ],
+    "steps": [{ "step": "1", "title": "string", "description": "string" }]
+  }
+]
