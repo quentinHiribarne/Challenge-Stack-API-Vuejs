@@ -11,6 +11,16 @@
 				{
 					"name": "POST /recipe",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwdWJsaWNLZXkiOiJQVUJMSUNfS0VZIiwiaWF0IjoxNjc4ODY2NTQ4LCJleHAiOjE2Nzg4NzAxNDh9.SlzrZgNoSiHy4P4GMqv-tKhIp0REawydZPQcrDtWfaA",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -37,12 +47,22 @@
 					"response": []
 				},
 				{
-					"name": "GET /recipe/{id}",
+					"name": "GET /recipe/:id",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwdWJsaWNLZXkiOiJQVUJMSUNfS0VZIiwiaWF0IjoxNjc4ODA4NTk0LCJleHAiOjE2Nzg4MTIxOTR9.UsOsTRp-meUhOgxgRiqNwGs4XkysAU_45uAkxW_Bw7c",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/recipe/s4v45tvv5",
+							"raw": "http://localhost:3000/recipe/:id",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -50,19 +70,35 @@
 							"port": "3000",
 							"path": [
 								"recipe",
-								"s4v45tvv5"
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "DELETE /recipe/{id}",
+					"name": "DELETE /recipe/:id",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwdWJsaWNLZXkiOiJQVUJMSUNfS0VZIiwiaWF0IjoxNjc4ODA4NTk0LCJleHAiOjE2Nzg4MTIxOTR9.UsOsTRp-meUhOgxgRiqNwGs4XkysAU_45uAkxW_Bw7c",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/recipe/5sakqrqhq",
+							"raw": "http://localhost:3000/recipe/:id",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -70,15 +106,31 @@
 							"port": "3000",
 							"path": [
 								"recipe",
-								"5sakqrqhq"
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "PUT /recipe/{id}",
+					"name": "PUT /recipe/:id",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwdWJsaWNLZXkiOiJQVUJMSUNfS0VZIiwiaWF0IjoxNjc4ODY2NTQ4LCJleHAiOjE2Nzg4NzAxNDh9.SlzrZgNoSiHy4P4GMqv-tKhIp0REawydZPQcrDtWfaA",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
@@ -91,7 +143,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/recipe/u3vqrm50p",
+							"raw": "http://localhost:3000/recipe/:id",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -99,7 +151,13 @@
 							"port": "3000",
 							"path": [
 								"recipe",
-								"u3vqrm50p"
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
 							]
 						}
 					},
@@ -107,9 +165,31 @@
 				},
 				{
 					"name": "GET /recipe/analyze",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwdWJsaWNLZXkiOiJQVUJMSUNfS0VZIiwiaWF0IjoxNjc4ODcxODY2LCJleHAiOjE2Nzg4NzU0NjZ9.cCFnI9otaJJ3oj2EN4IB6sWkHGFpEQn5XCGiZqyN0TQ",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"56pj41a0j\",\r\n    \"title\": \"string\",\r\n    \"author\": \"string\",\r\n    \"publication_date\": \"14/3/2023\",\r\n    \"ingredients\": [\r\n      { \"id\": 1, \"quantity\": 2 },\r\n      { \"id\": 2, \"quantity\": 1 },\r\n      { \"id\": 3, \"quantity\": 1 }\r\n    ],\r\n    \"steps\": [{ \"step\": \"1\", \"title\": \"string\", \"description\": \"string\" }]\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "http://localhost:3000/recipe/analyze",
 							"protocol": "http",
@@ -133,6 +213,16 @@
 				{
 					"name": "POST /ingredient",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwdWJsaWNLZXkiOiJQVUJMSUNfS0VZIiwiaWF0IjoxNjc4ODA4NTk0LCJleHAiOjE2Nzg4MTIxOTR9.UsOsTRp-meUhOgxgRiqNwGs4XkysAU_45uAkxW_Bw7c",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -159,53 +249,95 @@
 					"response": []
 				},
 				{
-					"name": "GET /ingredient/{id}",
+					"name": "GET /ingredient/:id",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwdWJsaWNLZXkiOiJQVUJMSUNfS0VZIiwiaWF0IjoxNjc4ODY2NTQ4LCJleHAiOjE2Nzg4NzAxNDh9.SlzrZgNoSiHy4P4GMqv-tKhIp0REawydZPQcrDtWfaA",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/recipe/s4v45tvv5",
+							"raw": "http://localhost:3000/ingredient/:id",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"recipe",
-								"s4v45tvv5"
+								"ingredient",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "DELETE /ingredient/{id}",
+					"name": "DELETE /ingredient/:id",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwdWJsaWNLZXkiOiJQVUJMSUNfS0VZIiwiaWF0IjoxNjc4ODY2NTQ4LCJleHAiOjE2Nzg4NzAxNDh9.SlzrZgNoSiHy4P4GMqv-tKhIp0REawydZPQcrDtWfaA",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/recipe/5sakqrqhq",
+							"raw": "http://localhost:3000/ingredient/:id",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"recipe",
-								"5sakqrqhq"
+								"ingredient",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "PUT /ingredient/{id}",
+					"name": "PUT /ingredient/:id",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwdWJsaWNLZXkiOiJQVUJMSUNfS0VZIiwiaWF0IjoxNjc4ODY2NTQ4LCJleHAiOjE2Nzg4NzAxNDh9.SlzrZgNoSiHy4P4GMqv-tKhIp0REawydZPQcrDtWfaA",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": \"u3vqrm50p\",\r\n    \"title\": \"string2\",\r\n    \"author\": \"string\",\r\n    \"publication_date\": \"string\",\r\n    \"ingredients\": [\r\n        {\r\n            \"name\": \"string\",\r\n            \"quantity\": \"2\",\r\n            \"unit\": \"string\",\r\n            \"calorie\": \"2\"\r\n        },\r\n        {\r\n            \"name\": \"string\",\r\n            \"quantity\": \"2\",\r\n            \"unit\": \"string\",\r\n            \"calorie\": \"2\"\r\n        }\r\n    ],\r\n    \"steps\": [\r\n        {\r\n            \"step\": \"1\",\r\n            \"title\": \"string\",\r\n            \"description\": \"string\"\r\n        },\r\n        {\r\n            \"step\": \"2\",\r\n            \"title\": \"string\",\r\n            \"description\": \"string\"\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"id\": \"cqr8wjzg1\",\r\n    \"publication_date\": \"14/3/2023\",\r\n    \"name\": \"string2\",\r\n    \"description\": \"String\",\r\n    \"nutrition\": {\r\n        \"calories\": 1,\r\n        \"fat\": 0,\r\n        \"carbohydrates\": 0,\r\n        \"protein\": 0\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -213,15 +345,73 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/recipe/u3vqrm50p",
+							"raw": "http://localhost:3000/ingredient/:id",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"recipe",
-								"u3vqrm50p"
+								"ingredient",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Token",
+			"item": [
+				{
+					"name": "GET /token/generate",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/token/generate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"token",
+								"generate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /token//verify/:token",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/token/verify/:token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"token",
+								"verify",
+								":token"
+							],
+							"variable": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwdWJsaWNLZXkiOiJQVUJMSUNfS0VZIiwiaWF0IjoxNjc4ODg2OTU5LCJleHAiOjE2Nzg4OTA1NTl9.V842hTRmOo-sH5spVsqwdinOeg-KstIyP8WCdYdlIa4"
+								}
 							]
 						}
 					},
@@ -232,26 +422,27 @@
 		{
 			"name": "GET /ingredients",
 			"request": {
-				"method": "GET",
-				"header": []
-			},
-			"response": []
-		},
-		{
-			"name": "GET /token/generate",
-			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwdWJsaWNLZXkiOiJQVUJMSUNfS0VZIiwiaWF0IjoxNjc4ODY2NTQ4LCJleHAiOjE2Nzg4NzAxNDh9.SlzrZgNoSiHy4P4GMqv-tKhIp0REawydZPQcrDtWfaA",
+							"type": "string"
+						}
+					]
+				},
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/token/generate",
+					"raw": "http://localhost:3000/ingredients",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"token",
-						"generate"
+						"ingredients"
 					]
 				}
 			},
@@ -265,7 +456,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwdWJsaWNLZXkiOiJQVUJMSUNfS0VZIiwiaWF0IjoxNjc4ODAzNjQzLCJleHAiOjE2Nzg4MDcyNDN9.GOP_ilDLuoV8U0JzmYod0wZzOtE3qGqaRkC8YX3OpEc",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwdWJsaWNLZXkiOiJQVUJMSUNfS0VZIiwiaWF0IjoxNjc4ODA2NjY1LCJleHAiOjE2Nzg4MTAyNjV9.I4tI2UlVV-4mXzKHcghU7HCklr-Vmr_yfkkqbkQKkec",
 							"type": "string"
 						}
 					]
