@@ -1,5 +1,5 @@
 const express = require("express");
-const { verifyToken, readFile } = require("../src/utils");
+const { verifyToken, loadIngredients } = require("../src/utils");
 
 const router = express.Router();
 /**
@@ -16,11 +16,8 @@ router.get("/", (req, res) => {
     res.status(401).send("Unauthorized request");
   }
 
-  // Get ingredients from Json file: /API/data/ingredients.json
-  let ingredients = readFile(process.cwd() + "/data/ingredients.json");
-
   // Return the ingredients
-  res.json(ingredients);
+  res.json(loadIngredients());
 });
 
 module.exports = router;

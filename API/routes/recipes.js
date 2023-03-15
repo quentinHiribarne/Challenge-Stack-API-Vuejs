@@ -1,5 +1,5 @@
 const express = require("express");
-const { readFile, analyzeRecipe, verifyToken } = require("../src/utils");
+const { verifyToken, loadRecipes } = require("../src/utils");
 
 const router = express.Router();
 /**
@@ -40,16 +40,8 @@ router.get("/", (req, res) => {
     res.status(401).send("Unauthorized request");
   }
 
-  // Get recipes from Json file: /API/data/recipes.json
-  let recipes = readFile(process.cwd() + "/data/recipes.json");
-
-  // For each recipe, calculate the nutritional information and add it to the recipe object
-  for (let recipe of recipes) {
-    recipe.totalCalories = analyzeRecipe(recipe);
-  }
-
   // Return the recipes
-  res.json(recipes);
+  res.json(loadRecipes());
 });
 
 module.exports = router;

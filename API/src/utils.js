@@ -103,10 +103,39 @@ const verifyToken = (token) => {
   }
 };
 
+/**
+ * Load the recipes from the Json file and return the recipes object with the nutritional information
+ * @returns {Object} - The recipes object
+ */
+const loadRecipes = () => {
+  // Get recipes from the recipes.json file
+  const recipesFile = process.cwd() + "/data/recipes.json";
+  const recipes = readFile(recipesFile);
+
+  // For each recipe, calculate the nutritional information and add it to the recipe object
+  for (let recipe of recipes) {
+    recipe.totalCalories = analyzeRecipe(recipe);
+  }
+
+  return recipes;
+};
+
+/**
+ * Load the ingredients from the Json file and return the ingredients object
+ * @returns {Object} - The ingredients object
+ */
+const loadIngredients = () => {
+  // Get ingredients from the ingredients.json file
+  const ingredientsFile = process.cwd() + "/data/ingredients.json";
+  return readFile(ingredientsFile);
+};
+
 // Export the functions
 module.exports = {
   readFile,
   writeFile,
   analyzeRecipe,
   verifyToken,
+  loadRecipes,
+  loadIngredients,
 };

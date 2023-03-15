@@ -1,16 +1,15 @@
 const express = require("express");
 const {
-  readFile,
   writeFile,
   analyzeRecipe,
   verifyToken,
+  loadRecipes,
 } = require("../src/utils");
 
 const router = express.Router();
 
-// Get recipes from Json file: /API/data/recipes.json
+// Path to the recipes.json file
 const recipesFile = process.cwd() + "/data/recipes.json";
-let recipes = readFile(recipesFile);
 
 /**
  * POST /recipe
@@ -28,6 +27,9 @@ router.post("/", (req, res) => {
 
   // Get recipe from the request body
   let recipe = req.body;
+
+  // Get recipes from the recipes.json file
+  let recipes = loadRecipes();
 
   // Generate unique id for the recipe
   let id = Math.random().toString(36).substr(2, 9);
@@ -56,7 +58,7 @@ router.post("/", (req, res) => {
   // Add recipe to the recipes.json file
   writeFile(recipesFile, recipes);
 
-  res.send("recipe is added to the database");
+  res.status(201).json(loadRecipes());
 });
 
 /**
@@ -106,23 +108,24 @@ router.delete("/:id", (req, res) => {
 
   // Reading id from the URL
   const id = req.params.id;
-  let status, message;
+
+  // Get recipes from the recipes.json file
+  let recipes = loadRecipes();
 
   // Remove item from the recipes array
   recipes = recipes.filter((recipe) => {
     // If the id is different, keep the item in the array
     if (recipe.id !== id) {
       // Set the status and message
-      res.status(200).send("recipe not found");
+      res.status(404).send("recipe not found");
 
       return true;
     }
-    // Else, set the status and message and remove the item from the array
 
     // Write the upadted list to the recipes.json file
     writeFile(recipesFile, recipes);
 
-    res.status(200).send("recipe deleted");
+    res.status(200).json(loadRecipes());
 
     return false;
   });
@@ -146,7 +149,9 @@ router.put("/:id", (req, res) => {
   // Reading id from the URL
   const id = req.params.id;
   const newrecipe = req.body;
-  let status, message;
+
+  // Get recipes from the recipes.json file
+  let recipes = loadRecipes();
 
   // Schearch recipes for the id
   for (let i = 0; i < recipes.length; i++) {
@@ -159,7 +164,8 @@ router.put("/:id", (req, res) => {
       // Write the upadted list to the recipes.json file
       writeFile(recipesFile, recipes);
 
-      res.status(200).send("recipe updated");
+      // send the updated recipe list and 200 status
+      res.status(200).json(loadRecipes());
     } else {
       res.status(404).send("recipe not found");
     }
