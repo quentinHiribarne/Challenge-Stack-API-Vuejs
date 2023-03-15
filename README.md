@@ -52,7 +52,8 @@ GET /ingredients - Récupérer tous les ingrédients
 #### Token
 
 ```bash
-POST /token/generate - Générer un token
+GET /token/generate - Générer un token
+GET /token/verify/:token - Vérifier un token
 ```
 
 ### Tests de l'API
