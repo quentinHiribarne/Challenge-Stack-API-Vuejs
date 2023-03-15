@@ -7,8 +7,12 @@ const router = express.Router();
  * Purpose: Get all ingredients
  */
 router.get("/", (req, res) => {
+  // Get the token from the request header
+  //Authorization: 'Bearer TOKEN'
+  const token = req.headers.authorization?.split(" ")[1];
+
   // Verify the token
-  if (!verifyToken(req)) {
+  if (!verifyToken(token)) {
     res.status(401).send("Unauthorized request");
   }
 

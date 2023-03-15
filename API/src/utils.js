@@ -79,11 +79,7 @@ const analyzeRecipe = (recipe) => {
  * @param {Object} req - The request object
  * @returns {Boolean} - The token verification result
  */
-const verifyToken = (req) => {
-  // Get the token from the request header
-  //Authorization: 'Bearer TOKEN'
-  const token = req.headers.authorization.split(" ")[1];
-
+const verifyToken = (token) => {
   // Get public key and private key from the environment variables
   const publicKey = process.env.PUBLIC_KEY;
   const privateKey = process.env.PRIVATE_KEY;

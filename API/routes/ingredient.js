@@ -12,8 +12,12 @@ let ingredients = readFile(ingredientsFile);
  * Purpose: Create a ingredient
  */
 router.post("/", (req, res) => {
+  // Get the token from the request header
+  //Authorization: 'Bearer TOKEN'
+  const token = req.headers.authorization?.split(" ")[1];
+
   // Verify the token
-  if (!verifyToken(req)) {
+  if (!verifyToken(token)) {
     res.status(401).send("Unauthorized request");
   }
 
@@ -57,8 +61,12 @@ router.post("/", (req, res) => {
  * Params: {id} - id of the ingredient
  */
 router.get("/:id", (req, res) => {
+  // Get the token from the request header
+  //Authorization: 'Bearer TOKEN'
+  const token = req.headers.authorization?.split(" ")[1];
+
   // Verify the token
-  if (!verifyToken(req)) {
+  if (!verifyToken(token)) {
     res.status(401).send("Unauthorized request");
   }
 
@@ -83,8 +91,12 @@ router.get("/:id", (req, res) => {
  * Params: {id} - id of the ingredient
  */
 router.delete("/:id", (req, res) => {
+  // Get the token from the request header
+  //Authorization: 'Bearer TOKEN'
+  const token = req.headers.authorization?.split(" ")[1];
+
   // Verify the token
-  if (!verifyToken(req)) {
+  if (!verifyToken(token)) {
     res.status(401).send("Unauthorized request");
   }
 
@@ -111,8 +123,12 @@ router.delete("/:id", (req, res) => {
  * Params: {id} - id of the ingredient
  */
 router.put("/:id", (req, res) => {
+  // Get the token from the request header
+  //Authorization: 'Bearer TOKEN'
+  const token = req.headers.authorization?.split(" ")[1];
+
   // Verify the token
-  if (!verifyToken(req)) {
+  if (!verifyToken(token)) {
     res.status(401).send("Unauthorized request");
   }
 

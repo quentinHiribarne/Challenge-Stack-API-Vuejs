@@ -17,8 +17,12 @@ let recipes = readFile(recipesFile);
  * Purpose: Create a recipe
  */
 router.post("/", (req, res) => {
+  // Get the token from the request header
+  //Authorization: 'Bearer TOKEN'
+  const token = req.headers.authorization?.split(" ")[1];
+
   // Verify the token
-  if (!verifyToken(req)) {
+  if (!verifyToken(token)) {
     res.status(401).send("Unauthorized request");
   }
 
@@ -61,8 +65,12 @@ router.post("/", (req, res) => {
  * Params: {id} - id of the recipe
  */
 router.get("/:id", (req, res) => {
+  // Get the token from the request header
+  //Authorization: 'Bearer TOKEN'
+  const token = req.headers.authorization?.split(" ")[1];
+
   // Verify the token
-  if (!verifyToken(req)) {
+  if (!verifyToken(token)) {
     res.status(401).send("Unauthorized request");
   }
 
@@ -87,8 +95,12 @@ router.get("/:id", (req, res) => {
  * Params: {id} - id of the recipe
  */
 router.delete("/:id", (req, res) => {
+  // Get the token from the request header
+  //Authorization: 'Bearer TOKEN'
+  const token = req.headers.authorization?.split(" ")[1];
+
   // Verify the token
-  if (!verifyToken(req)) {
+  if (!verifyToken(token)) {
     res.status(401).send("Unauthorized request");
   }
 
@@ -122,8 +134,12 @@ router.delete("/:id", (req, res) => {
  * Params: {id} - id of the recipe
  */
 router.put("/:id", (req, res) => {
+  // Get the token from the request header
+  //Authorization: 'Bearer TOKEN'
+  const token = req.headers.authorization?.split(" ")[1];
+
   // Verify the token
-  if (!verifyToken(req)) {
+  if (!verifyToken(token)) {
     res.status(401).send("Unauthorized request");
   }
 
@@ -155,8 +171,12 @@ router.put("/:id", (req, res) => {
  * Purpose: Analyze a recipe nutritional value
  */
 router.get("/analyze", (req, res) => {
+  // Get the token from the request header
+  //Authorization: 'Bearer TOKEN'
+  const token = req.headers.authorization?.split(" ")[1];
+
   // Verify the token
-  if (!verifyToken(req)) {
+  if (!verifyToken(token)) {
     res.status(401).send("Unauthorized request");
   }
 

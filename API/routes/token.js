@@ -1,5 +1,6 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
+const { verifyToken } = require("../src/utils");
 require("dotenv").config();
 
 const router = express.Router();
@@ -31,6 +32,17 @@ router.get("/generate", (req, res) => {
   res.status(200).json({
     token: token,
   });
+});
+
+/**
+ * GET /token/verify/:token
+ * Purpose: Verify the token
+ * Params: {token} - token to be verified
+ */
+router.get("/verify/:token", (req, res) => {
+  let token = req.params.token;
+
+  res.status(200).json({ isTokenValid: verifyToken(token) });
 });
 
 module.exports = router;
