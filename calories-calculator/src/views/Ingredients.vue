@@ -40,10 +40,10 @@
 
                         <tbody class="divide-y divide-gray-200">
                             <tr v-for="ingredient in ingredients" :key="ingredient.id">
-                                <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
+                                <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-900">
                                     {{ ingredient.name }}
                                 </td>
-                                <td class="hidden sm:table-cell whitespace-nowrap py-4 px-3 text-sm text-gray-500 max-w-md">
+                                <td class="hidden sm:table-cell whitespace-nowrap py-4 px-3 text-sm text-gray-700 max-w-md">
                                     {{ ingredient.description }}
                                 </td>
                                 <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
@@ -89,7 +89,7 @@
                         <span class="text-red-500">*</span>
                     </label>
                     <div class="mt-2">
-                        <input type="name" name="name" id="name"
+                        <input type="text" name="name" id="name"
                             v-model="ingredient.name"
                             class="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-500 focus:outline-none sm:text-sm sm:leading-6" />
                     </div>
@@ -100,11 +100,59 @@
                         <span class="text-red-500">*</span>
                     </label>
                     <div class="mt-2">
-                        <textarea type="description" name="description" id="description" 
+                        <textarea name="description" id="description" 
                             v-model="ingredient.description"
                             class="block w-full rounded-md border-0 py-1.5 px-2 sm:text-sm sm:leading-6 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-500 focus:outline-none" />
                     </div>
                 </div>
+                <div class="pt-2 border-t border-gray-300">
+                    <p class="block text-sm font-medium leading-6 text-gray-500">
+                        Informations nutritionnelles
+                    </p>
+                    <div class="sm:grid sm:grid-cols-2 gap-4 mt-2">
+                        <div>
+                            <label for="calories" class="block text-sm font-medium leading-6 text-gray-900">
+                                Calories
+                            </label>
+                            <div class="mt-2">
+                                <input type="text" name="calories" id="calories" 
+                                    v-model="ingredient.nutrition.calories"
+                                    class="block w-full rounded-md border-0 py-1.5 px-2 sm:text-sm sm:leading-6 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-500 focus:outline-none" />
+                            </div>
+                        </div>
+                        <div>
+                            <label for="fat" class="block text-sm font-medium leading-6 text-gray-900">
+                                Gras
+                            </label>
+                            <div class="mt-2">
+                                <input type="text" name="fat" id="calories" 
+                                    v-model="ingredient.nutrition.fat"
+                                    class="block w-full rounded-md border-0 py-1.5 px-2 sm:text-sm sm:leading-6 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-500 focus:outline-none" />
+                            </div>
+                        </div>
+                        <div>
+                            <label for="carbo" class="block text-sm font-medium leading-6 text-gray-900">
+                                Carbohydrates
+                            </label>
+                            <div class="mt-2">
+                                <input type="text" name="carbo" id="carbo" 
+                                    v-model="ingredient.nutrition.carbohydrates"
+                                    class="block w-full rounded-md border-0 py-1.5 px-2 sm:text-sm sm:leading-6 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-500 focus:outline-none" />
+                            </div>
+                        </div>
+                        <div>
+                            <label for="protein" class="block text-sm font-medium leading-6 text-gray-900">
+                                Protéines
+                            </label>
+                            <div class="mt-2">
+                                <input type="text" name="protein" id="protein" 
+                                    v-model="ingredient.nutrition.protein"
+                                    class="block w-full rounded-md border-0 py-1.5 px-2 sm:text-sm sm:leading-6 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-emerald-500 focus:outline-none" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
             </div>
         </template>
     </SlideOver>
@@ -148,6 +196,7 @@
     const editing = ref(false);
     const ingredient = ref({
         name: '',
+        description: '',
         nutrition: {
             calories: 0,
             fat: 0,
@@ -156,7 +205,7 @@
         }
     });
 
-    const isValid = computed(() => !ingredient.value.title || !ingredient.value.author ? false : true);
+    const isValid = computed(() => !ingredient.value.name || !ingredient.value.description ? false : true);
 
     const createIngredient = () => {
         showSlideOver.value = true;
@@ -174,6 +223,7 @@
         showSlideOver.value = false;
         ingredient.value = {
             name: '',
+            description: '',
             nutrition: {
                 calories: 0,
                 fat: 0,
