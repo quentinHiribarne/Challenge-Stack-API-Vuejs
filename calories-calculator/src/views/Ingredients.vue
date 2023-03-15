@@ -43,7 +43,7 @@
                                 <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-900">
                                     {{ ingredient.name }}
                                 </td>
-                                <td class="hidden sm:table-cell whitespace-nowrap py-4 px-3 text-sm text-gray-700 max-w-md">
+                                <td class="hidden sm:table-cell py-4 px-3 text-sm text-gray-700 max-w-sm">
                                     {{ ingredient.description }}
                                 </td>
                                 <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
