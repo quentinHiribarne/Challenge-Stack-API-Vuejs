@@ -1,0 +1,310 @@
+{
+	"info": {
+		"_postman_id": "d5f9df23-ac20-4d1d-9575-397337cc2469",
+		"name": "Challenge-Stack-API-Vuejs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Recipe",
+			"item": [
+				{
+					"name": "POST /recipe",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"string\",\r\n    \"author\": \"string\",\r\n    \"publication_date\": \"string\",\r\n    \"ingredients\": [\r\n        {\r\n            \"name\": \"string\",\r\n            \"quantity\": \"2\",\r\n            \"unit\": \"string\",\r\n            \"calorie\": \"2\"\r\n        }\r\n    ],\r\n    \"steps\": [\r\n        {\r\n            \"step\": \"1\",\r\n            \"title\": \"string\",\r\n            \"description\": \"string\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/recipe",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"recipe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /recipe/{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/recipe/s4v45tvv5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"recipe",
+								"s4v45tvv5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE /recipe/{id}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/recipe/5sakqrqhq",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"recipe",
+								"5sakqrqhq"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT /recipe/{id}",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"u3vqrm50p\",\r\n    \"title\": \"string2\",\r\n    \"author\": \"string\",\r\n    \"publication_date\": \"string\",\r\n    \"ingredients\": [\r\n        {\r\n            \"name\": \"string\",\r\n            \"quantity\": \"2\",\r\n            \"unit\": \"string\",\r\n            \"calorie\": \"2\"\r\n        },\r\n        {\r\n            \"name\": \"string\",\r\n            \"quantity\": \"2\",\r\n            \"unit\": \"string\",\r\n            \"calorie\": \"2\"\r\n        }\r\n    ],\r\n    \"steps\": [\r\n        {\r\n            \"step\": \"1\",\r\n            \"title\": \"string\",\r\n            \"description\": \"string\"\r\n        },\r\n        {\r\n            \"step\": \"2\",\r\n            \"title\": \"string\",\r\n            \"description\": \"string\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/recipe/u3vqrm50p",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"recipe",
+								"u3vqrm50p"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /recipe/analyze",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/recipe/analyze",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"recipe",
+								"analyze"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ingredient",
+			"item": [
+				{
+					"name": "POST /ingredient",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n  {\r\n    \"name\": \"string\",\r\n    \"description\": \"String\",\r\n    \"nutrition\": {\r\n      \"calories\": 1,\r\n      \"fat\": 0,\r\n      \"carbohydrates\": 0,\r\n      \"protein\": 0\r\n    }\r\n  }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/ingredient",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"ingredient"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET /ingredient/{id}",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/recipe/s4v45tvv5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"recipe",
+								"s4v45tvv5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE /ingredient/{id}",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/recipe/5sakqrqhq",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"recipe",
+								"5sakqrqhq"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT /ingredient/{id}",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"u3vqrm50p\",\r\n    \"title\": \"string2\",\r\n    \"author\": \"string\",\r\n    \"publication_date\": \"string\",\r\n    \"ingredients\": [\r\n        {\r\n            \"name\": \"string\",\r\n            \"quantity\": \"2\",\r\n            \"unit\": \"string\",\r\n            \"calorie\": \"2\"\r\n        },\r\n        {\r\n            \"name\": \"string\",\r\n            \"quantity\": \"2\",\r\n            \"unit\": \"string\",\r\n            \"calorie\": \"2\"\r\n        }\r\n    ],\r\n    \"steps\": [\r\n        {\r\n            \"step\": \"1\",\r\n            \"title\": \"string\",\r\n            \"description\": \"string\"\r\n        },\r\n        {\r\n            \"step\": \"2\",\r\n            \"title\": \"string\",\r\n            \"description\": \"string\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/recipe/u3vqrm50p",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"recipe",
+								"u3vqrm50p"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GET /ingredients",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "GET /token/generate",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/token/generate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"token",
+						"generate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET /recipes",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwdWJsaWNLZXkiOiJQVUJMSUNfS0VZIiwiaWF0IjoxNjc4ODAzNjQzLCJleHAiOjE2Nzg4MDcyNDN9.GOP_ilDLuoV8U0JzmYod0wZzOtE3qGqaRkC8YX3OpEc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/recipes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"recipes"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

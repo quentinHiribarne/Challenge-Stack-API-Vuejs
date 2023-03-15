@@ -3,6 +3,10 @@ import MainLayout from '../layout/MainLayout.vue';
 
 const routes = [
     {
+        path: '/login',
+        component: () => import("../views/Login.vue")
+    },
+    {
         path: '/',
         component: MainLayout,
         children: [
@@ -33,6 +37,17 @@ const routes = [
 const router = createRouter({
     history: createWebHistory(),
     routes,
+});
+
+router.beforeEach(async (to) => {
+    // redirect to login page if not logged in and trying to access a restricted page
+    const publicPages = ['/login'];
+    const authRequired = !publicPages.includes(to.path);
+    const auth = localStorage.token;
+
+    if (authRequired && !auth) {
+        return '/login';
+    }
 });
 
 export default router;
