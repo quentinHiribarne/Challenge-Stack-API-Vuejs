@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import MainLayout from '../layout/MainLayout.vue';
 
+import Login from '../API/login.js';
+
 const routes = [
     {
         path: '/login',
@@ -43,7 +45,10 @@ router.beforeEach(async (to) => {
     // redirect to login page if not logged in and trying to access a restricted page
     const publicPages = ['/login'];
     const authRequired = !publicPages.includes(to.path);
-    const auth = localStorage.token;
+    const auth = await Login.isTokenValid(localStorage.token);
+    console.log(authRequired);
+    console.log(localStorage.token);
+    console.log(auth);
 
     if (authRequired && !auth) {
         return '/login';

@@ -3,15 +3,15 @@
         <div class="sm:flex sm:items-center">
             <div class="sm:flex-auto">
                 <h1 class="text-xl font-semibold leading-6 text-gray-900">
-                    Recettes
+                    Ingrédients
                 </h1>
                 <p class="mt-2 text-sm text-gray-700">
-                    Liste complète des recettes enregistrées. Cliquez sur une recette pour afficher ses détails (ingrédients et étapes de préparation). Vous pouvez également éditer ou supprimer n'importe quelle recette.
+                    Liste complète des ingrédients enregistrées. Vous pouvez éditer ou supprimer n'importe quel ingrédient.
                 </p>
             </div>
             <div class="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-                <button @click="createIngredient" type="button" class="block rounded-md bg-emerald-500 py-2 px-3 text-center text-sm font-semibold text-white shadow-sm hover:bg-emerald-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600">
-                    Ajouter une recette
+                <button @click="showSlideOver = true" type="button" class="block rounded-md bg-emerald-500 py-2 px-3 text-center text-sm font-semibold text-white shadow-sm hover:bg-emerald-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600">
+                    Ajouter un ingrédient
                 </button>
             </div>
         </div>
@@ -43,7 +43,7 @@
                                 <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-900">
                                     {{ ingredient.name }}
                                 </td>
-                                <td class="hidden sm:table-cell whitespace-nowrap py-4 px-3 text-sm text-gray-700 max-w-md">
+                                <td class="hidden sm:table-cell py-4 px-3 text-sm text-gray-700 max-w-sm">
                                     {{ ingredient.description }}
                                 </td>
                                 <td class="whitespace-nowrap py-4 px-3 text-sm text-gray-500">
@@ -56,11 +56,11 @@
                                 </td>
                                 <td class="py-4 pl-3 w-fit">
                                     <div class="flex flex-col sm:flex-row gap-4">
-                                        <div @click="editIngredient(ingredient)" class="cursor-pointer">
+                                        <div @click="openEditForm(ingredient)" class="cursor-pointer">
                                             <PencilSquareIcon class="w-5 h-5 text-blue-500 hover:text-blue-400" />
                                             <span class="sr-only">Éditer</span>
                                         </div>
-                                        <div @click="deleteIngredient(ingredient)" class="cursor-pointer">
+                                        <div @click="deleteIngredient(ingredient.id)" class="cursor-pointer">
                                             <TrashIcon class="w-5 h-5 text-red-500 hover:text-red-400" />
                                             <span class="sr-only">Supprimer</span>
                                         </div>
@@ -159,7 +159,9 @@
 </template>
 
 <script setup>
-    import { ref, computed } from 'vue';
+    import { ref, computed, onMounted } from 'vue';
+
+    import { Ingredients as IngredientsAPI } from '../API';
 
     import { PencilSquareIcon, TrashIcon, CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/24/solid';
     import { Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions } from '@headlessui/vue';
@@ -167,30 +169,7 @@
     import SlideOver from '../components/overlays/SlideOverSlotActionFooter.vue';
     import Modal from '../components/overlays/ModalSimpleSlot.vue';
 
-    const ingredients = ref([
-        {
-            id: 1,
-            name: "Blanc de poulet",
-            description: "Source de protéines maigres provenant de la viande de poulet.",
-            nutrition: {
-                calories: 165,
-                fat: 3.6,
-                carbohydrates: 0,
-                protein: 31
-            }
-        },
-        {
-            id: 2,
-            name: "Riz brun",
-            description: "Riz à grains entiers au goût de noisette et à la texture moelleuse.",
-            nutrition: {
-                calories: 216,
-                fat: 1.8,
-                carbohydrates: 45,
-                protein: 5
-            }
-        },
-    ]);
+    const ingredients = ref([]);
 
     const showSlideOver = ref(false);
     const editing = ref(false);
@@ -210,14 +189,25 @@
     const createIngredient = () => {
         showSlideOver.value = true;
     };
-    const editIngredient = (editIngredient) => {
+    const openEditForm = (ingredientToEdit) => {
         showSlideOver.value = true;
         editing.value = true;
-        ingredient.value = editIngredient;
+        ingredient.value = ingredientToEdit;
     };
-    const deleteIngredient = (ingredient) => console.log('delete ' + ingredient.id);
+    const deleteIngredient = async (id) => ingredients.value = await IngredientsAPI.deleteIngredient(id, localStorage.token);
 
-    const saveIngredient = () => editing.value ? console.log('save changes in ' + ingredient.value.id) : console.log('save new ingredient ' + ingredient.value.title);
+    const saveIngredient = async () => {
+        if (editing.value) {
+            console.log('update');
+            ingredients.value = await IngredientsAPI.updateIngredient(ingredient.value, localStorage.token);
+
+        } else {
+            console.log('create');
+            ingredients.value = await IngredientsAPI.createIngredient(ingredient.value, localStorage.token);
+        }
+
+        closeSlideOver();
+    };
 
     const closeSlideOver = () => {
         showSlideOver.value = false;
@@ -232,4 +222,8 @@
             }
         };
     };
+
+    onMounted( async () => {
+        ingredients.value = await IngredientsAPI.getIngredients(localStorage.token);
+    });
 </script>

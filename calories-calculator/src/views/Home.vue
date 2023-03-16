@@ -32,32 +32,43 @@
 </template>
 
 <script setup>
+    import { ref, computed, onMounted } from 'vue';
+
+    import { Recipes as RecipesAPI, Ingredients as IngredientsAPI } from '../API';
+
     import { CalculatorIcon, DocumentTextIcon, SparklesIcon, ShoppingCartIcon } from '@heroicons/vue/24/outline';
 
-    const hilights = [
-        {
-            name: 'X recettes',
-            description:
-            'Consultez la liste de nos recettes. Elles sont collaboratives et chacun peut apporter sa pierre à l\'édifice pour une meilleure alimentation.',
-            icon: DocumentTextIcon,
-        },
-        {
-            name: 'X ingrédients',
-            description:
-            'Ajoutez vous-même des recettes en les construisant à partir de notre liste d\'ingrédients. Si vous ne trouvez pas votre bonheur, n\'hésitez pas à en ajouter !',
-            icon: ShoppingCartIcon,
-        },
-        {
-            name: 'Calculateur',
-            description:
-            'Importez vos propres recettes afin de connaître leur teneur en calories. Vous pouvez par la suite les sauvegarder afin de les ajouter à notre base de données.',
-            icon: CalculatorIcon,
-        },
-        {
-            name: 'Partagez-nous votre avis !',
-            description:
-            'Il s\'agit d\'une première version de l\'application, nous avons déjà des améliorations dans les tuyaux. Cependant nous serions ravis d\'entendre votre avis et vos suggestions !',
-            icon: SparklesIcon,
-        },
-    ];
+    const recipes = ref([]);
+    const ingredients = ref([]);
+
+    const hilights = computed(() => {
+        const array = [
+            {
+                name: `${recipes.value.length} recettes`,
+                description: 'Consultez la liste de nos recettes. Elles sont collaboratives et chacun peut apporter sa pierre à l\'édifice pour une meilleure alimentation.',
+                icon: DocumentTextIcon,
+            },
+            {
+                name: `${ingredients.value.length} ingrédients`,
+                description: 'Ajoutez vous-même des recettes en les construisant à partir de notre liste d\'ingrédients. Si vous ne trouvez pas votre bonheur, n\'hésitez pas à en ajouter !',
+                icon: ShoppingCartIcon,
+            },
+            {
+                name: 'Calculateur',
+                description: 'Importez vos propres recettes afin de connaître leur teneur en calories. Vous pouvez par la suite les sauvegarder afin de les ajouter à notre base de données.',
+                icon: CalculatorIcon,
+            },
+            {
+                name: 'Partagez-nous votre avis !',
+                description: 'Il s\'agit d\'une première version de l\'application, nous avons déjà des améliorations dans les tuyaux. Cependant nous serions ravis d\'entendre votre avis et vos suggestions !',
+                icon: SparklesIcon,
+            }
+        ];
+        return array;
+    });
+
+    onMounted( async () => {
+        recipes.value = await RecipesAPI.getRecipes(localStorage.token);
+        ingredients.value = await IngredientsAPI.getIngredients(localStorage.token);
+    });
 </script>
