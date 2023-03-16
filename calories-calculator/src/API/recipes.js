@@ -8,9 +8,14 @@ class Recipes {
                 'Authorization': `Bearer ${token}`
             }
         
-        }).then((res) => res.json()
+        }).then((res) => {
+            if (res.status == 401) {
+                location.assign('/login');
+            } else {
+               res.json(); 
+            }
         
-        ).catch(err => console.log(err));
+        }).catch(err => console.log(err));
     };
 
     async updateRecipe(recipe, token) {
@@ -22,9 +27,14 @@ class Recipes {
             },
             body: JSON.stringify(recipe)
         
-        }).then((res) => res.json()
+        }).then((res) => {
+            if (res.status == 401) {
+                location.assign('/login');
+            } else {
+               res.json(); 
+            }
         
-        ).catch(err => console.log(err));
+        }).catch(err => console.log(err));
     };
 
     async createRecipe(recipe, token) {
@@ -36,9 +46,14 @@ class Recipes {
             },
             body: JSON.stringify(recipe)
         
-        }).then((res) => res.json()
+        }).then((res) => {
+            if (res.status == 401) {
+                location.assign('/login');
+            } else {
+               res.json(); 
+            }
         
-        ).catch(err => console.log(err));
+        }).catch(err => console.log(err));
     };
 
     async deleteRecipe(id, token) {
@@ -49,9 +64,14 @@ class Recipes {
                 'Authorization': `Bearer ${token}`
             }
         
-        }).then((res) => res.json()
+        }).then((res) => {
+            if (res.status == 401) {
+                location.assign('/login');
+            } else {
+               res.json(); 
+            }
         
-        ).catch(err => console.log(err));
+        }).catch(err => console.log(err));
     };
 
     async analyzeRecipe(recipe, token) {
@@ -63,9 +83,14 @@ class Recipes {
             },
             body: JSON.stringify(recipe)
         
-        }).then((res) => res.json()
+        }).then((res) => {
+            if (res.status == 401) {
+                location.assign('/login');
+            } else {
+               res.json(); 
+            }
         
-        ).catch(err => console.log(err));
+        }).catch(err => console.log(err));
     };
 };
 
