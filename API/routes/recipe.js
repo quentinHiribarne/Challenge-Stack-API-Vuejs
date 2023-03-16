@@ -112,23 +112,19 @@ router.delete("/:id", (req, res) => {
   // Get recipes from the recipes.json file
   let recipes = loadRecipes();
 
-  // Remove item from the recipes array
-  recipes = recipes.filter((recipe) => {
-    // If the id is different, keep the item in the array
-    if (recipe.id !== id) {
-      // Set the status and message
-      res.status(404).send("recipe not found");
+  // Searching recipes for the id then remove the recipe, or send 404
+  for (let i = 0; i < recipes.length; i++) {
+    let recipe = recipes[i];
 
-      return true;
+    if (recipe.id === id) {
+      recipes.splice(i, 1);
+      writeFile(recipesFile, recipes);
+      res.status(200).json(loadRecipes());
+      return;
     }
+  }
 
-    // Write the upadted list to the recipes.json file
-    writeFile(recipesFile, recipes);
-
-    res.status(200).json(loadRecipes());
-
-    return false;
-  });
+  res.status(404).send("recipe not found");
 });
 
 /**
