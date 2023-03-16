@@ -12,7 +12,7 @@ class Ingredients {
             if (res.status == 401) {
                 location.assign('/login');
             } else {
-               res.json(); 
+               return res.json(); 
             }
         
         }).catch(err => {
@@ -32,7 +32,7 @@ class Ingredients {
             if (res.status == 401) {
                 location.assign('/login');
             } else {
-               res.json(); 
+               return res.json(); 
             }
         
         }).catch(err => console.log(err));
@@ -51,7 +51,7 @@ class Ingredients {
             if (res.status == 401) {
                 location.assign('/login');
             } else {
-               res.json(); 
+               return res.json(); 
             }
         
         }).catch(err => console.log(err));
@@ -70,7 +70,7 @@ class Ingredients {
             if (res.status == 401) {
                 location.assign('/login');
             } else {
-               res.json(); 
+                return res.json();
             }
         
         }).catch(err => console.log(err));
@@ -88,7 +88,7 @@ class Ingredients {
             if (res.status == 401) {
                 location.assign('/login');
             } else {
-               res.json(); 
+               return res.json(); 
             }
         
         }).catch(err => console.log(err));
