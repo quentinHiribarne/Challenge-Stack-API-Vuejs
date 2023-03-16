@@ -1,14 +1,1 @@
-[
-  {
-    "id": "56pj41a0j",
-    "title": "string",
-    "author": "string",
-    "publication_date": "14/3/2023",
-    "ingredients": [
-      { "id": 1, "quantity": 2 },
-      { "id": 2, "quantity": 1 },
-      { "id": 3, "quantity": 1 }
-    ],
-    "steps": [{ "step": "1", "title": "string", "description": "string" }]
-  }
-]
+[{"id":"56pj41a0j","title":"Riz sauté au poulet","author":"Louise","publication_date":"14/3/2023","ingredients":[{"id":1,"quantity":2,"name":"Blanc de poulet","description":"Source de protéines maigres provenant de la viande de poulet.","nutrition":{"calories":165,"fat":3.6,"carbohydrates":0,"protein":31}},{"id":2,"quantity":1,"name":"Riz brun","description":"Riz à grains entiers au goût de noisette et à la texture moelleuse.","nutrition":{"calories":216,"fat":1.8,"carbohydrates":45,"protein":5}},{"id":3,"quantity":1,"name":"Brocoli","description":"Légume nutritif avec fleurons verts et tiges.","nutrition":{"calories":55,"fat":0.6,"carbohydrates":10,"protein":4}}],"steps":[{"step":"1","title":"string","description":"string"}],"totalCalories":601},{"id":"li4xns458","title":"Poulet brocolis","author":"Louise","ingredients":[{"id":1,"name":"Blanc de poulet","description":"Source de protéines maigres provenant de la viande de poulet.","nutrition":{"calories":165,"fat":3.6,"carbohydrates":0,"protein":31},"quantity":2},{"id":3,"name":"Brocoli","description":"Légume nutritif avec fleurons verts et tiges.","nutrition":{"calories":55,"fat":0.6,"carbohydrates":10,"protein":4},"quantity":1}],"steps":[],"publication_date":"16/3/2023"}]

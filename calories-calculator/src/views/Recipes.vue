@@ -267,17 +267,19 @@
         recipe.value = recipeToEdit;
     };
 
-    const deleteRecipe = async (id) => recipes.value = await RecipesAPI.deleteRecipe(id);
+    const deleteRecipe = async (id) => recipes.value = await RecipesAPI.deleteRecipe(id, localStorage.token);
 
     const saveRecipe = async () => {
-        
         if (editing.value) {
             console.log('update');
-            recipes.value = await RecipesAPI.updateRecipe(recipe.value);
+            recipes.value = await RecipesAPI.updateRecipe(recipe.value, localStorage.token);
+
         } else {
             console.log('create');
-            recipes.value = await RecipesAPI.createRecipe(recipe.value);
+            recipes.value = await RecipesAPI.createRecipe(recipe.value, localStorage.token);
         }
+
+        closeSlideOver();
     };
 
     const closeSlideOver = () => {

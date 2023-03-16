@@ -13,7 +13,7 @@ class Recipes {
         ).catch(err => console.log(err));
     };
 
-    async updateRecipe(recipe) {
+    async updateRecipe(recipe, token) {
         return fetch(`http://127.0.0.1:3000/recipe/${recipe.id}`, {
             method: 'PUT',
             headers: {
@@ -27,7 +27,7 @@ class Recipes {
         ).catch(err => console.log(err));
     };
 
-    async createRecipe(recipe) {
+    async createRecipe(recipe, token) {
         return fetch(`http://127.0.0.1:3000/recipe`, {
             method: 'POST',
             headers: {
@@ -41,7 +41,7 @@ class Recipes {
         ).catch(err => console.log(err));
     };
 
-    async deleteRecipe(id) {
+    async deleteRecipe(id, token) {
         return fetch(`http://127.0.0.1:3000/recipe/${id}`, {
             method: 'POST',
             headers: {
