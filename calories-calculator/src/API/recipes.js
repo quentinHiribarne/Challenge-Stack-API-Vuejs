@@ -55,8 +55,8 @@ class Recipes {
     };
 
     async analyzeRecipe(recipe, token) {
-        return fetch(`http://127.0.0.1:3000/analyze/`, {
-            method: 'GET',
+        return fetch(`http://127.0.0.1:3000/recipe/analyze/`, {
+            method: 'POST',
             headers: {
                 'content-type': 'application/json',
                 'Authorization': `Bearer ${token}`

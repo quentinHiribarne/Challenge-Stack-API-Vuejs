@@ -1,10 +1,11 @@
 <template>
     <div class="relative block w-full rounded-lg border-2 border-dashed border-gray-300 p-8 text-center">
         <div class="text-center">
-            <label for="file" class="block mt-1 text-base text-gray-500">
+            <label for="recipe" class="block mt-1 text-base text-gray-500">
                 Déposez votre recette ici
             </label>
-            <input type="file" ref="file" name="file"
+            <input type="file"
+                ref="recipe" name="recipe"
                 accept=".json"
                 class="mt-4 text-base"
                 @change="handleFileUpload">
@@ -33,13 +34,14 @@
 
     import { ArrowDownTrayIcon } from '@heroicons/vue/20/solid';
 
-    const file = ref(null);
+    const recipe = ref(null);
     const result = ref(null);
 
-    const analyse = async () => result.value = await RecipesAPI.analyzeRecipe(file, localStorage.token);
+    const analyze = async () => result.value = await Recipes.analyzeRecipe(recipe.value, localStorage.token);
 
     const handleFileUpload = async() => {
-        console.log("selected file", file.value.files);
+        recipe.value = recipe.value.files[0];
+        console.log("selected recipe", recipe.value);
     }
 
 </script>
