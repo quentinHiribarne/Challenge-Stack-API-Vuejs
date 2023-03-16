@@ -10,7 +10,7 @@ class Login {
         }).then((res) => res.json()
         
         ).catch(err => console.log(err));
-    }
+    };
 
     async isTokenValid(token) {
         return fetch(`http://127.0.0.1:3000/token/verify/${token}`, {
@@ -22,7 +22,7 @@ class Login {
         }).then((res) => res.json()
         
         ).catch(err => console.log(err));
-    }
+    };
 
 };
 
