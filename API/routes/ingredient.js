@@ -109,9 +109,9 @@ router.delete("/:id", (req, res) => {
   let ingredients = loadIngredients();
 
   // Schearch ingredients for the id
-  if (ingredients.some((ingredient) => ingredient.id === id)) {
-    // If the id is found, remove the ingredient
-    ingredients = ingredients.filter((ingredient) => ingredient.id !== id);
+  if (ingredients.some((ingredient) => ingredient.id == id)) {
+    // If the id is found, remove the ingredient from the array
+    ingredients = ingredients.filter((ingredient) => ingredient.id != id);
 
     // Write the upadted list to the ingredients.json file
     writeFile(ingredientsFile, ingredients);
@@ -145,10 +145,10 @@ router.put("/:id", (req, res) => {
   let ingredients = loadIngredients();
 
   // Schearch ingredients for the id
-  if (ingredients.some((ingredient) => ingredient.id === id)) {
+  if (ingredients.some((ingredient) => ingredient.id == id)) {
     // If the id is found, update the ingredient
     ingredients = ingredients.map((ingredient) => {
-      if (ingredient.id === id) {
+      if (ingredient.id == id) {
         return {
           ...ingredient,
           ...newingredient,

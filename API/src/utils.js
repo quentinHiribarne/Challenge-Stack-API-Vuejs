@@ -51,16 +51,28 @@ const analyzeRecipe = (recipe) => {
   const ingredientsFile = process.cwd() + "/data/ingredients.json";
   const ingredientsRef = readFile(ingredientsFile);
 
+  // Check if the recipe.ingredients exists and is not empty
+  if (!recipe.ingredients || !recipe.ingredients.length) {
+    return "No ingredients";
+  }
+
   // Loop through the ingredientsRef and calculate the total calories for the recipe
   for (let ingredient of recipe.ingredients) {
     // Get the ingredient from the ingredientsRef
-    let ingredientRef;
+    let ingredientRef,
+      isIngredientValid = false;
 
+    // Check if the ingredient exists in the ingredientsRef, if not, return unknown ingredient and stop the loop
     for (let i of ingredientsRef) {
       if (i.id === ingredient.id) {
         ingredientRef = i.nutrition;
+        isIngredientValid = true;
         break;
       }
+    }
+
+    if (!isIngredientValid) {
+      return "Unknown ingredient";
     }
 
     // Calculate the calories for the ingredient

@@ -25,7 +25,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"string\",\r\n    \"author\": \"string\",\r\n    \"publication_date\": \"string\",\r\n    \"ingredients\": [\r\n        {\r\n            \"name\": \"string\",\r\n            \"quantity\": \"2\",\r\n            \"unit\": \"string\",\r\n            \"calorie\": \"2\"\r\n        }\r\n    ],\r\n    \"steps\": [\r\n        {\r\n            \"step\": \"1\",\r\n            \"title\": \"string\",\r\n            \"description\": \"string\"\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"title\": \"string\",\r\n    \"author\": \"string\",\r\n    \"ingredients\": [\r\n        {\r\n            \"id\": 1,\r\n            \"quantity\": 2\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"quantity\": 1\r\n        },\r\n        {\r\n            \"id\": 3,\r\n            \"quantity\": 1\r\n        }\r\n    ],\r\n    \"steps\": [\r\n        {\r\n            \"step\": \"1\",\r\n            \"title\": \"string\",\r\n            \"description\": \"string\"\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -135,7 +135,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": \"u3vqrm50p\",\r\n    \"title\": \"string2\",\r\n    \"author\": \"string\",\r\n    \"publication_date\": \"string\",\r\n    \"ingredients\": [\r\n        {\r\n            \"name\": \"string\",\r\n            \"quantity\": \"2\",\r\n            \"unit\": \"string\",\r\n            \"calorie\": \"2\"\r\n        },\r\n        {\r\n            \"name\": \"string\",\r\n            \"quantity\": \"2\",\r\n            \"unit\": \"string\",\r\n            \"calorie\": \"2\"\r\n        }\r\n    ],\r\n    \"steps\": [\r\n        {\r\n            \"step\": \"1\",\r\n            \"title\": \"string\",\r\n            \"description\": \"string\"\r\n        },\r\n        {\r\n            \"step\": \"2\",\r\n            \"title\": \"string\",\r\n            \"description\": \"string\"\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"id\": \"u3vqrm50p\",\r\n    \"title\": \"string2\",\r\n    \"author\": \"string\",\r\n    \"publication_date\": \"string\",\r\n    \"ingredients\": [\r\n        {\r\n            \"id\": \"string\",\r\n            \"quantity\": \"2\"\r\n        },\r\n        {\r\n            \"id\": \"string\",\r\n            \"quantity\": \"2\"\r\n        }\r\n    ],\r\n    \"steps\": [\r\n        {\r\n            \"step\": \"1\",\r\n            \"title\": \"string\",\r\n            \"description\": \"string\"\r\n        },\r\n        {\r\n            \"step\": \"2\",\r\n            \"title\": \"string\",\r\n            \"description\": \"string\"\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -164,22 +164,19 @@
 					"response": []
 				},
 				{
-					"name": "GET /recipe/analyze",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
+					"name": "POST /recipe/analyze",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwdWJsaWNLZXkiOiJQVUJMSUNfS0VZIiwiaWF0IjoxNjc4ODcxODY2LCJleHAiOjE2Nzg4NzU0NjZ9.cCFnI9otaJJ3oj2EN4IB6sWkHGFpEQn5XCGiZqyN0TQ",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwdWJsaWNLZXkiOiJQVUJMSUNfS0VZIiwiaWF0IjoxNjc4OTYxNDY3LCJleHAiOjE2Nzg5NjUwNjd9.mZeKRm8CreE8nVbpmoQEbaRJkqUtbHh29PhDXmc7NSs",
 									"type": "string"
 								}
 							]
 						},
-						"method": "GET",
+						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
