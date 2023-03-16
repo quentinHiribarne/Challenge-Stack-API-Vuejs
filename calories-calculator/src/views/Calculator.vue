@@ -29,12 +29,14 @@
 <script setup>
     import { ref } from 'vue';
 
+    import Recipes from '../API/recipes.js';
+
     import { ArrowDownTrayIcon } from '@heroicons/vue/20/solid';
 
     const file = ref(null);
     const result = ref(null);
 
-    const analyse = () => console.log("résultat de l'analyse de 'file'");
+    const analyse = async () => result.value = await RecipesAPI.analyzeRecipe(file, localStorage.token);
 
     const handleFileUpload = async() => {
         console.log("selected file", file.value.files);

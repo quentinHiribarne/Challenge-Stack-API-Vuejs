@@ -53,6 +53,19 @@ class Recipes {
         
         ).catch(err => console.log(err));
     };
+
+    async analyzeRecipe(recipe, token) {
+        return fetch(`http://127.0.0.1:3000/analyze/`, {
+            method: 'GET',
+            headers: {
+                'content-type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
+        
+        }).then((res) => res.json()
+        
+        ).catch(err => console.log(err));
+    };
 };
 
 export default new Recipes();
