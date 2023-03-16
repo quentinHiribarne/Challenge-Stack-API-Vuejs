@@ -22,7 +22,7 @@
             Rapport d'analyse :
         </h3>
         <p>
-            {{ result.calories }}
+            {{ result.totalCalories }}
         </p>
     </div>
 </template>
