@@ -43,7 +43,7 @@ class Recipes {
 
     async deleteRecipe(id, token) {
         return fetch(`http://127.0.0.1:3000/recipe/${id}`, {
-            method: 'POST',
+            method: 'DELETE',
             headers: {
                 'content-type': 'application/json',
                 'Authorization': `Bearer ${token}`
@@ -60,7 +60,8 @@ class Recipes {
             headers: {
                 'content-type': 'application/json',
                 'Authorization': `Bearer ${token}`
-            }
+            },
+            body: JSON.stringify(recipe)
         
         }).then((res) => res.json()
         
