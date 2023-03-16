@@ -81,7 +81,7 @@ class Recipes {
                 'content-type': 'application/json',
                 'Authorization': `Bearer ${token}`
             },
-            body: JSON.stringify(recipe)
+            body: recipe
         
         }).then((res) => {
             if (res.status == 401) {
