@@ -25,7 +25,7 @@ POST /recipe - Créer une recette
 GET /recipe/:id - Récupérer une recette par son id
 DELETE /recipe/:id - Supprimer une recette par son id
 PUT /recipe/:id - Modifier une recette par son id
-GET /recipe/analyse/ - Analyse la valeur nutritionnelle (total des calories) en fonction des ingrédients d'une recette recupérée depuis le body de la requête
+POST /recipe/analyse/ - Analyse la valeur nutritionnelle (total des calories) en fonction des ingrédients d'une recette recupérée depuis le body de la requête
 ```
 
 #### Recipes

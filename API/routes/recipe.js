@@ -79,6 +79,9 @@ router.get("/:id", (req, res) => {
   // Reading id from the URL
   const id = req.params.id;
 
+  // Get recipes from the recipes.json file
+  let recipes = loadRecipes();
+
   // Searching recipes for the id
   for (let recipe of recipes) {
     if (recipe.id === id) {
@@ -169,10 +172,10 @@ router.put("/:id", (req, res) => {
 });
 
 /**
- * GET /recipe/analyze
+ * POST /recipe/analyze
  * Purpose: Analyze a recipe nutritional value
  */
-router.get("/analyze", (req, res) => {
+router.post("/analyze", (req, res) => {
   // Get the token from the request header
   //Authorization: 'Bearer TOKEN'
   const token = req.headers.authorization?.split(" ")[1];
