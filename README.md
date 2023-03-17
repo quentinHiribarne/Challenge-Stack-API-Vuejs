@@ -1,5 +1,11 @@
 # Challenge-Stack-API-Vuejs
 
+## Groupe
+```bash
+Louise Bertin -- Front-end
+Quentin Hiribarne Pionnier -- API
+```
+
 ## API
 
 ### Installation
