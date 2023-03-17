@@ -76,7 +76,7 @@
 
     <SlideOver
        :open="showSlideOver"
-       :title="editing ? 'Modifier la recette' : 'Créer une recette'"
+       :title="editing ? 'Modifier l\'ingrédient' : 'Ajouter un ingrédient'"
        :isValid="isValid"
        @close="closeSlideOver"
        @save="saveIngredient" >
