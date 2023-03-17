@@ -201,6 +201,26 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "GET /token/generate",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/token/generate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"token",
+								"generate"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -388,7 +408,7 @@
 					"response": []
 				},
 				{
-					"name": "GET /token//verify/:token",
+					"name": "GET /token/verify/:token",
 					"request": {
 						"method": "GET",
 						"header": [],
