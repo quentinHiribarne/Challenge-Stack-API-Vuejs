@@ -46,9 +46,6 @@ router.beforeEach(async (to) => {
     const publicPages = ['/login'];
     const authRequired = !publicPages.includes(to.path);
     const auth = await Login.isTokenValid(localStorage.token);
-    console.log(authRequired);
-    console.log(localStorage.token);
-    console.log(auth);
 
     if (authRequired && !auth) {
         return '/login';

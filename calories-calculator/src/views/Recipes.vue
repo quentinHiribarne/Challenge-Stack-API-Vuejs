@@ -271,11 +271,9 @@
 
     const saveRecipe = async () => {
         if (editing.value) {
-            console.log('update');
             recipes.value = await RecipesAPI.updateRecipe(recipe.value, localStorage.token);
 
         } else {
-            console.log('create');
             recipes.value = await RecipesAPI.createRecipe(recipe.value, localStorage.token);
         }
 
@@ -283,6 +281,7 @@
     };
 
     const closeSlideOver = () => {
+        editing.value = false;
         showSlideOver.value = false;
         recipe.value = {
             title: '',

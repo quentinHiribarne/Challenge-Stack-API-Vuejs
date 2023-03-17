@@ -40,20 +40,17 @@
     const result = ref(null);
 
     const analyze = async () => {
-        console.log(recipe.value);
         result.value = await Recipes.analyzeRecipe(recipe.value, localStorage.token);
     }
 
     const fileSelector = document.getElementById('recipe');
     const handleFileUpload = async () => {
         recipe.value = recipe.value.files[0];
-        // console.log("selected recipe", recipe.value);
         
         var reader = new FileReader();
         reader.readAsText(recipe.value, "UTF-8");
         reader.onload = function (evt) {
             recipe.value = evt.target.result;
-            console.log(recipe.value);
         }
         reader.onerror = function (evt) {
             document.getElementById("recipe").innerHTML = "error reading file";
