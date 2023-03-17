@@ -76,7 +76,7 @@
 
     <SlideOver
        :open="showSlideOver"
-       :title="editing ? 'Modifier la recette' : 'Créer une recette'"
+       :title="editing ? 'Modifier l\'ingrédient' : 'Ajouter un ingrédient'"
        :isValid="isValid"
        @close="closeSlideOver"
        @save="saveIngredient" >
@@ -188,6 +188,7 @@
 
     const createIngredient = () => {
         showSlideOver.value = true;
+        editing.value = false;
     };
     const openEditForm = (ingredientToEdit) => {
         showSlideOver.value = true;
@@ -198,11 +199,10 @@
 
     const saveIngredient = async () => {
         if (editing.value) {
-            console.log('update');
+            editing.value = false;
             ingredients.value = await IngredientsAPI.updateIngredient(ingredient.value, localStorage.token);
 
         } else {
-            console.log('create');
             ingredients.value = await IngredientsAPI.createIngredient(ingredient.value, localStorage.token);
         }
 
@@ -210,6 +210,7 @@
     };
 
     const closeSlideOver = () => {
+        editing.value = false;
         showSlideOver.value = false;
         ingredient.value = {
             name: '',
